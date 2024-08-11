@@ -86,7 +86,7 @@ public class RealmManager implements Savable {
 			this.centre = centre;
 		}
 		public RealmStructure() {
-			this(getDefaultStructure(), new BlockPos(2, 162, 1)); // default island structure
+			this(getDefaultStructure(), new BlockPos(-5, 162, 1)); // default island structure
 		}
 		public RealmStructure(CompoundTag data) {
 			this.structure = new ResourceLocation(data.getString("Structure"));
