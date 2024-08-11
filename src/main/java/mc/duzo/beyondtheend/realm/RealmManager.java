@@ -185,7 +185,7 @@ public class RealmManager implements Savable {
 
 			if (found == null) {
 				EndersJourney.LOGGER.error("Could not find realm structure template");
-				return new BlockPos(0, 0, 0);
+				return null;
 			}
 
 			Vec3i size = found.getSize();
@@ -248,6 +248,7 @@ public class RealmManager implements Savable {
 				// Assume we dont need to adjust their spawnpoint + teleport.
 				return;
 			}
+			if (this.parent.getStructure().getCentre() == null) return;
 
 			this.parent.teleport(player);
 			player.setRespawnPosition(RealmManager.getDimension().dimension(), this.parent.getStructure().getCentre(), 0, true, false);
