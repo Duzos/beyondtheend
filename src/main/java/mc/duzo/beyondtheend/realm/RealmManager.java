@@ -22,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 public class RealmManager implements Savable {
-	private RealmStructure structure;
+	private Structure structure;
 	private PlayerManager player;
 
 	public RealmManager() {}
@@ -42,7 +42,7 @@ public class RealmManager implements Savable {
 
 	@Override
 	public void deserialise(CompoundTag data) {
-		this.structure = new RealmStructure(data.getCompound("Structure"));
+		this.structure = new Structure(data.getCompound("Structure"));
 		this.player = new PlayerManager(this, data.getCompound("Player"));
 	}
 
@@ -53,10 +53,10 @@ public class RealmManager implements Savable {
 		return EndersJourney.getServer().getLevel(EnderDimensions.REALM_KEY);
 	}
 
-	public RealmStructure getStructure() {
+	public Structure getStructure() {
 		if (this.structure == null) {
 			EndersJourney.LOGGER.warn("Missing realm structure! Creating..");
-			this.structure = new RealmStructure();
+			this.structure = new Structure();
 		}
 
 		return structure;
@@ -76,19 +76,19 @@ public class RealmManager implements Savable {
 		EnderDimensions.teleport(entity, getDimension(), vec, entity.getYRot(), entity.getXRot());
 	}
 
-	public static class RealmStructure implements Savable {
+	public static class Structure implements Savable {
 		private final ResourceLocation structure;
 		private boolean isPlaced;
 		private BlockPos centre;
-		public RealmStructure(ResourceLocation structure, @Nullable BlockPos centre) {
+		public Structure(ResourceLocation structure, @Nullable BlockPos centre) {
 			this.structure = structure;
 			this.isPlaced = false;
 			this.centre = centre;
 		}
-		public RealmStructure() {
+		public Structure() {
 			this(getDefaultStructure(), new BlockPos(-5, 162, 1)); // default island structure
 		}
-		public RealmStructure(CompoundTag data) {
+		public Structure(CompoundTag data) {
 			this.structure = new ResourceLocation(data.getString("Structure"));
 
 			this.deserialise(data);
