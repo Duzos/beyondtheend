@@ -168,7 +168,7 @@ public class RealmManager implements Savable {
 					offset,
 					new StructurePlaceSettings(),
 					level.getRandom(),
-					Block.UPDATE_NONE
+					Block.UPDATE_KNOWN_SHAPE
 			);
 
 			this.isPlaced = true;
